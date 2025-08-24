@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom New Tab</title>
+
+  <style>
+    /* ========== Base Styles ========== */
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      width: 100vw;
+      background: #121212; /* dark background */
+      color: white;
+    }
+
+    /* Dark overlay on top of background iframe */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 0;
+    }
+
+    /* Fullscreen iframe (background clock/animation) */
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      z-index: 1;
+    }
+
+    /* ========== Search Bar ========== */
+    .search-container {
+      position: fixed;
+      top: 120px;               /* distance from top */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;             /* default width on desktop */
+      max-width: 90%;           /* responsive shrink */
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      background: #2c2c2c;      /* dark bar */
+      border-radius: 40px;
+      padding: 10px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    /* Input field inside search bar */
+    .search-container input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: white;
+      font-size: 16px;
+      padding: 8px;
+    }
+
+    /* Search button (magnifier) */
+    .search-container button {
+      background: none;
+      border: none;
+      color: #bbb;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
+    .search-container button:hover {
+      color: white;
+    }
+
+    /* ========== Shortcuts Bar ========== */
+    .shortcuts {
+      position: fixed;
+      bottom: 30px;             /* distance from bottom */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-wrap: wrap;          /* allows icons to wrap in small screens */
+      gap: 20px;
+      z-index: 2;
+      justify-content: center;
+    }
+
+    /* Shortcut icons */
+    .shortcuts a img {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: transparent;
+      filter: brightness(0.95); /* make icons slightly darker for uniform look */
+      transition: transform 0.2s ease, box-shadow 0.3s;
+    }
+
+    /* Hover effect for desktop */
+    .shortcuts a img:hover {
+      transform: scale(1.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* ========== Responsive Adjustments ========== */
+    @media (max-width: 768px) {
+      /* Tablets / medium screens */
+      .search-container {
+        top: 80px;              /* bring bar closer to top */
+        width: 90%;             /* full width with margins */
+        padding: 8px 15px;
+      }
+
+      .shortcuts a img {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Mobile / small screens */
+      .search-container {
+        top: 60px;              /* keep search bar visible */
+        width: 95%;             /* stretch more */
+        font-size: 14px;
+      }
+
+      .shortcuts {
+        gap: 15px;              /* reduce spacing between icons */
+        bottom: 20px;           /* bring icons closer */
+      }
+
+      .shortcuts a img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Overlay above iframe background -->
+  <div class="overlay"></div>
+
+  <!-- Background iframe (clock/animation) -->
+  <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
+
+  <!-- Search bar (Google Search in same tab) -->
+  <form class="search-container" action="https://www.google.com/search" method="GET">
+    <input type="text" name="q" placeholder="Search Google or type a URL" autocomplete="off">
+    <button type="submit">🔍</button>
+  </form>
+
+  <!-- Shortcuts with proper icons -->
+  <div class="shortcuts">
+    <a href="https://www.google.com">
+      <img src="https://www.google.com/favicon.ico" alt="Google">
+    </a>
+    <a href="https://chat.openai.com">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+    </a>
+    <a href="https://www.youtube.com">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+    </a>
+    <a href="https://github.com">
+      <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+    </a>
+    <a href="https://www.spotify.com">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
+    </a>
+    <a href="https://qa.glammery.in/">
+      <img src="https://qa.glammery.in/favicon.ico" alt="Glammery">
+    </a>
+    <a href="https://www.notion.so">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
+    </a>
+  </div>
+</body>
+</html>
