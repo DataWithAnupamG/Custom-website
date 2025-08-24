@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom New Tab</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Background website */
+    iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      z-index: 0;
+    }
+
+    /* Shortcut bar */
+    .shortcuts {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 1;
+    }
+
+    .shortcuts a {
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .shortcuts a:hover {
+      background: rgba(255, 255, 255, 0.8);
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background website -->
+  <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
+
+  <!-- Shortcuts -->
+  <div class="shortcuts">
+    <a href="https://www.google.com" target="_blank">Google</a>
+    <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
+    <a href="https://www.youtube.com" target="_blank">YouTube</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+</body>
+</html>
