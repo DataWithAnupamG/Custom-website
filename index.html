@@ -15,7 +15,6 @@
       color: white;
     }
 
-    /* Overlay above iframe */
     .overlay {
       position: absolute;
       top: 0;
@@ -38,100 +37,219 @@
     }
 
     /* =========================
-       Glowing Search Bar
+       Glowing Search Bar (authentic effect)
     ========================== */
     :root {
-      --poda-primary: 12, 25, 71;
-      --poda-secondary: 81, 23, 101;
+      --input-w: 600px;
+      --input-h: 60px;
+      --radius: 40px;
+
+      --frame-w: calc(var(--input-w) + 6px);
+      --frame-h: calc(var(--input-h) + 6px);
+      --frame2-w: calc(var(--input-w) + 10px);
+      --frame2-h: calc(var(--input-h) + 10px);
     }
 
     #poda {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: fixed;
       top: 120px;
       left: 50%;
       transform: translateX(-50%);
-      width: 600px;
-      max-width: 90%;
-      height: 80px;
-      border-radius: 50px;
-      cursor: text;
-      transition: transform 0.5s;
       z-index: 3;
-    }
-    #poda:hover {
-      transform: translateX(-50%) scale(1.02);
-    }
-
-    .glow, .darkBorderBg, .white, .border {
-      position: absolute;
-      inset: 0;
-      border-radius: 50px;
-      pointer-events: none;
-    }
-
-    .glow {
-      background: conic-gradient(from 0.5turn,
-        rgba(var(--poda-primary), .3),
-        rgba(var(--poda-secondary), .3));
-      filter: blur(30px);
-      opacity: .75;
-      animation: rotate 6s linear infinite;
-    }
-    .darkBorderBg {
-      background: radial-gradient(
-        rgba(var(--poda-primary), .52),
-        rgba(var(--poda-secondary), .35));
-      opacity: .16;
-    }
-    .white {
-      background: white;
-      opacity: 0.02;
-    }
-    .border {
-      border: 1px solid rgba(var(--poda-secondary), .8);
     }
 
     #main {
       position: relative;
-      height: 100%;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
+      width: var(--input-w);
+      height: var(--input-h);
     }
 
     .input {
-      flex: 1;
-      height: 50px;
+      background-color: #010201;
       border: none;
-      background: transparent;
-      font-size: 1.2rem;
-      padding: 0 60px 0 20px;
-      color: #fff;
-      z-index: 10;
+      width: var(--input-w);
+      height: var(--input-h);
+      border-radius: var(--radius);
+      color: white;
+      padding-inline: 20px 50px;
+      font-size: 18px;
+      position: relative;
+      z-index: 3;
     }
     .input::placeholder {
-      font-size: 1rem;
-      color: rgba(var(--poda-secondary), .75);
+      color: #c0b9c0;
     }
     .input:focus {
-      outline: none;
+      outline: 2px solid #2b2752;
     }
 
     #search-icon {
       position: absolute;
-      right: 25px;
-      font-size: 1.5rem;
-      color: rgba(var(--poda-secondary), .9);
+      right: 20px;
+      top: 15px;
+      z-index: 4;
+      font-size: 1.2rem;
+      color: #d6d6e6;
       cursor: pointer;
+      background: none;
+      border: none;
     }
 
-    @keyframes rotate {
-      to { transform: rotate(1turn); }
+    /* Layered gradient frames */
+    .white,
+    .border,
+    .darkBorderBg,
+    .glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: var(--radius);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .white,
+    .border,
+    .darkBorderBg {
+      width: var(--frame-w);
+      height: var(--frame-h);
+      filter: blur(3px);
+    }
+
+    .white {
+      filter: blur(2px);
+    }
+    .white::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(83deg);
+      width: 600px;
+      height: 600px;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      filter: brightness(1.4);
+      background-image: conic-gradient(
+        rgba(0, 0, 0, 0) 0%,
+        #a099d8,
+        rgba(0, 0, 0, 0) 8%,
+        rgba(0, 0, 0, 0) 50%,
+        #dfa2da,
+        rgba(0, 0, 0, 0) 58%
+      );
+      transition: transform 2s ease;
+    }
+
+    .border {
+      filter: blur(0.5px);
+    }
+    .border::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(70deg);
+      width: 600px;
+      height: 600px;
+      filter: brightness(1.3);
+      background-image: conic-gradient(
+        #1c191c,
+        #402fb5 5%,
+        #1c191c 14%,
+        #1c191c 50%,
+        #cf30aa 60%,
+        #1c191c 64%
+      );
+      transition: transform 2s ease;
+    }
+
+    .darkBorderBg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(82deg);
+      width: 600px;
+      height: 600px;
+      background-image: conic-gradient(
+        rgba(0, 0, 0, 0),
+        #18116a,
+        rgba(0, 0, 0, 0) 10%,
+        rgba(0, 0, 0, 0) 50%,
+        #6e1b60,
+        rgba(0, 0, 0, 0) 60%
+      );
+      transition: transform 2s ease;
+    }
+
+    .glow {
+      width: var(--frame2-w);
+      height: var(--frame2-h);
+      filter: blur(30px);
+      opacity: 0.4;
+    }
+    .glow::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(60deg);
+      width: 999px;
+      height: 999px;
+      background-image: conic-gradient(
+        #000,
+        #402fb5 5%,
+        #000 38%,
+        #000 50%,
+        #cf30aa 60%,
+        #000 87%
+      );
+      transition: transform 2s ease;
+    }
+
+    /* Hover animation */
+    #poda:hover > .darkBorderBg::before {
+      transform: translate(-50%, -50%) rotate(262deg);
+    }
+    #poda:hover > .glow::before {
+      transform: translate(-50%, -50%) rotate(240deg);
+    }
+    #poda:hover > .white::before {
+      transform: translate(-50%, -50%) rotate(263deg);
+    }
+    #poda:hover > .border::before {
+      transform: translate(-50%, -50%) rotate(250deg);
+    }
+
+    /* Focus animation */
+    #poda:focus-within > .darkBorderBg::before {
+      transform: translate(-50%, -50%) rotate(442deg);
+      transition: transform 4s ease;
+    }
+    #poda:focus-within > .glow::before {
+      transform: translate(-50%, -50%) rotate(420deg);
+      transition: transform 4s ease;
+    }
+    #poda:focus-within > .white::before {
+      transform: translate(-50%, -50%) rotate(443deg);
+      transition: transform 4s ease;
+    }
+    #poda:focus-within > .border::before {
+      transform: translate(-50%, -50%) rotate(430deg);
+      transition: transform 4s ease;
     }
 
     /* =========================
-       Shortcuts Bar
+       Shortcuts
     ========================== */
     .shortcuts {
       position: fixed;
@@ -149,7 +267,6 @@
       width: 50px;
       height: 50px;
       border-radius: 12px;
-      background: transparent;
       filter: brightness(0.95);
       transition: transform 0.2s ease, box-shadow 0.3s;
     }
@@ -157,42 +274,13 @@
       transform: scale(1.2);
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
-
-    @media (max-width: 768px) {
-      #poda {
-        top: 80px;
-        width: 90%;
-        height: 70px;
-      }
-      .shortcuts a img {
-        width: 44px;
-        height: 44px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      #poda {
-        top: 60px;
-        width: 95%;
-        height: 65px;
-      }
-      .shortcuts {
-        gap: 15px;
-        bottom: 20px;
-      }
-      .shortcuts a img {
-        width: 40px;
-        height: 40px;
-      }
-    }
   </style>
 </head>
-
 <body>
   <div class="overlay"></div>
   <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
 
-  <!-- Glowing Search Bar -->
+  <!-- Authentic Glowing Search Bar -->
   <form id="poda" action="https://www.google.com/search" method="GET">
     <div class="glow"></div>
     <div class="darkBorderBg"></div>
@@ -209,27 +297,13 @@
 
   <!-- Shortcuts -->
   <div class="shortcuts">
-    <a href="https://www.google.com">
-      <img src="https://www.google.com/favicon.ico" alt="Google">
-    </a>
-    <a href="https://chat.openai.com">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    </a>
-    <a href="https://www.youtube.com">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
-    </a>
-    <a href="https://github.com">
-      <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
-    </a>
-    <a href="https://www.spotify.com">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
-    </a>
-    <a href="https://qa.glammery.in/">
-      <img src="https://qa.glammery.in/favicon.ico" alt="Glammery">
-    </a>
-    <a href="https://www.notion.so">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
-    </a>
+    <a href="https://www.google.com"><img src="https://www.google.com/favicon.ico" alt="Google"></a>
+    <a href="https://chat.openai.com"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"></a>
+    <a href="https://www.youtube.com"><img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube"></a>
+    <a href="https://github.com"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"></a>
+    <a href="https://www.spotify.com"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify"></a>
+    <a href="https://qa.glammery.in/"><img src="https://qa.glammery.in/favicon.ico" alt="Glammery"></a>
+    <a href="https://www.notion.so"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion"></a>
   </div>
 </body>
 </html>
