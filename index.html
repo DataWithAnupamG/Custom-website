@@ -11,6 +11,8 @@
       font-family: Arial, sans-serif;
       height: 100vh;
       width: 100vw;
+      background: #121212;
+      color: white;
     }
 
     /* Dark overlay for contrast */
@@ -36,6 +38,46 @@
       z-index: 1;
     }
 
+    /* Search bar container */
+    .search-container {
+      position: fixed;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      max-width: 90%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      background: #2c2c2c;
+      border-radius: 40px;
+      padding: 10px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .search-container input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: white;
+      font-size: 16px;
+      padding: 8px;
+    }
+
+    .search-container button {
+      background: none;
+      border: none;
+      color: #bbb;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
+    .search-container button:hover {
+      color: white;
+    }
+
     /* Shortcut bar */
     .shortcuts {
       position: fixed;
@@ -51,7 +93,7 @@
       width: 50px;
       height: 50px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.7); /* ✅ darker background */
       padding: 8px;
       transition: transform 0.2s ease, background 0.3s;
     }
@@ -70,6 +112,12 @@
   <!-- Your live website -->
   <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
 
+  <!-- Search bar -->
+  <form class="search-container" action="https://www.google.com/search" method="GET" target="_blank">
+    <input type="text" name="q" placeholder="Search Google or type a URL" autocomplete="off">
+    <button type="submit">🔍</button>
+  </form>
+
   <!-- Shortcuts with icons -->
   <div class="shortcuts">
     <a href="https://www.google.com" target="_blank">
@@ -79,10 +127,19 @@
       <img src="https://chat.openai.com/favicon.ico" alt="ChatGPT">
     </a>
     <a href="https://www.youtube.com" target="_blank">
-      <img src="https://www.youtube.com/s/desktop/fe6f0a27/img/favicon_144x144.png" alt="YouTube">
+      <img src="https://www.youtube.com/favicon.ico" alt="YouTube">
     </a>
     <a href="https://github.com" target="_blank">
       <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub">
+    </a>
+    <a href="https://www.spotify.com" target="_blank">
+      <img src="https://www.scdn.co/i/_global/favicon.ico" alt="Spotify">
+    </a>
+    <a href="https://qa.glammery.in/" target="_blank">
+      <img src="https://qa.glammery.in/favicon.ico" alt="Glammery">
+    </a>
+    <a href="https://www.notion.so" target="_blank">
+      <img src="https://www.notion.so/images/favicon.ico" alt="Notion">
     </a>
   </div>
 </body>
