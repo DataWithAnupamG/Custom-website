@@ -5,17 +5,18 @@
   <title>Custom New Tab</title>
 
   <style>
+    /* ========== Base Styles ========== */
     body {
       margin: 0;
       overflow: hidden;
       font-family: Arial, sans-serif;
       height: 100vh;
       width: 100vw;
-      background: #121212;
+      background: #121212; /* dark background */
       color: white;
     }
 
-    /* Dark overlay */
+    /* Dark overlay on top of background iframe */
     .overlay {
       position: absolute;
       top: 0;
@@ -26,6 +27,7 @@
       z-index: 0;
     }
 
+    /* Fullscreen iframe (background clock/animation) */
     iframe {
       position: absolute;
       top: 0;
@@ -37,23 +39,24 @@
       z-index: 1;
     }
 
-    /* Search bar */
+    /* ========== Search Bar ========== */
     .search-container {
       position: fixed;
-      top: 120px;
+      top: 120px;               /* distance from top */
       left: 50%;
       transform: translateX(-50%);
-      width: 600px;
-      max-width: 90%;
+      width: 600px;             /* default width on desktop */
+      max-width: 90%;           /* responsive shrink */
       z-index: 3;
       display: flex;
       align-items: center;
-      background: #2c2c2c;
+      background: #2c2c2c;      /* dark bar */
       border-radius: 40px;
       padding: 10px 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
 
+    /* Input field inside search bar */
     .search-container input {
       flex: 1;
       border: none;
@@ -64,6 +67,7 @@
       padding: 8px;
     }
 
+    /* Search button (magnifier) */
     .search-container button {
       background: none;
       border: none;
@@ -77,38 +81,61 @@
       color: white;
     }
 
-    /* Shortcuts bar */
+    /* ========== Shortcuts Bar ========== */
     .shortcuts {
       position: fixed;
-      bottom: 30px;
+      bottom: 30px;             /* distance from bottom */
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      flex-wrap: wrap;   /* ✅ makes it mobile-friendly */
+      flex-wrap: wrap;          /* allows icons to wrap in small screens */
       gap: 20px;
       z-index: 2;
       justify-content: center;
     }
 
+    /* Shortcut icons */
     .shortcuts a img {
       width: 50px;
       height: 50px;
       border-radius: 12px;
       background: transparent;
+      filter: brightness(0.95); /* make icons slightly darker for uniform look */
       transition: transform 0.2s ease, box-shadow 0.3s;
     }
 
+    /* Hover effect for desktop */
     .shortcuts a img:hover {
       transform: scale(1.2);
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
-    /* ✅ Responsive adjustments */
+    /* ========== Responsive Adjustments ========== */
     @media (max-width: 768px) {
+      /* Tablets / medium screens */
       .search-container {
-        top: 80px;
-        width: 90%;
+        top: 80px;              /* bring bar closer to top */
+        width: 90%;             /* full width with margins */
         padding: 8px 15px;
+      }
+
+      .shortcuts a img {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Mobile / small screens */
+      .search-container {
+        top: 60px;              /* keep search bar visible */
+        width: 95%;             /* stretch more */
+        font-size: 14px;
+      }
+
+      .shortcuts {
+        gap: 15px;              /* reduce spacing between icons */
+        bottom: 20px;           /* bring icons closer */
       }
 
       .shortcuts a img {
@@ -116,28 +143,14 @@
         height: 40px;
       }
     }
-
-    @media (max-width: 480px) {
-      .search-container {
-        top: 60px;
-        width: 95%;
-        font-size: 14px;
-      }
-
-      .shortcuts {
-        gap: 15px;
-      }
-
-      .shortcuts a img {
-        width: 36px;
-        height: 36px;
-      }
-    }
   </style>
 </head>
 
 <body>
+  <!-- Overlay above iframe background -->
   <div class="overlay"></div>
+
+  <!-- Background iframe (clock/animation) -->
   <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
 
   <!-- Search bar -->
@@ -155,7 +168,7 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
     </a>
     <a href="https://www.youtube.com" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube">
     </a>
     <a href="https://github.com" target="_blank">
       <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
@@ -172,3 +185,5 @@
   </div>
 </body>
 </html>
+
+
