@@ -37,7 +37,7 @@
     }
 
     /* =========================
-       Glowing Search Bar (fixed)
+       Glowing Search Bar
     ========================== */
     :root {
       --input-w: 600px;
@@ -66,7 +66,7 @@
       width: var(--input-w);
       height: var(--input-h);
       border-radius: var(--radius);
-      overflow: hidden; /* 🔥 ensures glow stays inside */
+      overflow: hidden; /* 🔥 keeps glow inside */
     }
 
     .input {
@@ -113,7 +113,7 @@
       border-radius: var(--radius);
       pointer-events: none;
       z-index: 1;
-      overflow: hidden; /* 🔥 keep effect inside bar */
+      overflow: hidden;
     }
 
     .white,
@@ -124,111 +124,83 @@
       filter: blur(2px);
     }
 
-    .white::before {
+    .white::before,
+    .border::before,
+    .darkBorderBg::before,
+    .glow::before {
       content: "";
       position: absolute;
       inset: 0;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: conic-gradient(
-        #a099d8,
-        transparent 30%,
-        #dfa2da 60%,
-        transparent 90%
-      );
-      transform: rotate(83deg);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(80deg);
+      width: 600px;   /* 🔥 large gradients for smooth rotation */
+      height: 600px;
+      background-repeat: no-repeat;
+      background-position: 0 0;
       transition: transform 2s ease;
+    }
+
+    .white::before {
+      background-image: conic-gradient(
+        transparent 0%,
+        #a099d8 10%,
+        transparent 30%,
+        #dfa2da 50%,
+        transparent 70%
+      );
+      filter: brightness(1.4);
     }
 
     .border::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: conic-gradient(
-        #402fb5,
-        transparent 40%,
-        #cf30aa 70%,
-        transparent 100%
+      background-image: conic-gradient(
+        #1c191c,
+        #402fb5 10%,
+        #1c191c 40%,
+        #cf30aa 60%,
+        #1c191c 80%
       );
-      transform: rotate(70deg);
-      transition: transform 2s ease;
+      filter: brightness(1.3);
     }
 
     .darkBorderBg::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: conic-gradient(
-        #18116a,
-        transparent 30%,
+      background-image: conic-gradient(
+        transparent 0%,
+        #18116a 20%,
+        transparent 40%,
         #6e1b60 60%,
-        transparent 90%
+        transparent 80%
       );
-      transform: rotate(82deg);
-      transition: transform 2s ease;
     }
 
     .glow {
       width: var(--frame2-w);
       height: var(--frame2-h);
-      filter: blur(20px);
-      opacity: 0.3;
+      filter: blur(30px);
+      opacity: 0.4;
     }
     .glow::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: conic-gradient(
+      background-image: conic-gradient(
         #402fb5,
         transparent 30%,
         #cf30aa 60%,
         transparent 90%
       );
-      transform: rotate(60deg);
-      transition: transform 2s ease;
+      width: 800px;
+      height: 800px;
     }
 
     /* Hover animation */
-    #poda:hover > .darkBorderBg::before {
-      transform: rotate(262deg);
-    }
-    #poda:hover > .glow::before {
-      transform: rotate(240deg);
-    }
-    #poda:hover > .white::before {
-      transform: rotate(263deg);
-    }
-    #poda:hover > .border::before {
-      transform: rotate(250deg);
-    }
+    #poda:hover > .darkBorderBg::before { transform: translate(-50%, -50%) rotate(260deg); }
+    #poda:hover > .glow::before { transform: translate(-50%, -50%) rotate(240deg); }
+    #poda:hover > .white::before { transform: translate(-50%, -50%) rotate(263deg); }
+    #poda:hover > .border::before { transform: translate(-50%, -50%) rotate(250deg); }
 
     /* Focus animation */
-    #poda:focus-within > .darkBorderBg::before {
-      transform: rotate(442deg);
-      transition: transform 4s ease;
-    }
-    #poda:focus-within > .glow::before {
-      transform: rotate(420deg);
-      transition: transform 4s ease;
-    }
-    #poda:focus-within > .white::before {
-      transform: rotate(443deg);
-      transition: transform 4s ease;
-    }
-    #poda:focus-within > .border::before {
-      transform: rotate(430deg);
-      transition: transform 4s ease;
-    }
+    #poda:focus-within > .darkBorderBg::before { transform: translate(-50%, -50%) rotate(440deg); transition: transform 4s ease; }
+    #poda:focus-within > .glow::before { transform: translate(-50%, -50%) rotate(420deg); transition: transform 4s ease; }
+    #poda:focus-within > .white::before { transform: translate(-50%, -50%) rotate(443deg); transition: transform 4s ease; }
+    #poda:focus-within > .border::before { transform: translate(-50%, -50%) rotate(430deg); transition: transform 4s ease; }
 
     /* =========================
        Shortcuts
@@ -262,7 +234,7 @@
   <div class="overlay"></div>
   <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
 
-  <!-- Fixed Glowing Search Bar -->
+  <!-- Glowing Search Bar -->
   <form id="poda" action="https://www.google.com/search" method="GET">
     <div class="glow"></div>
     <div class="darkBorderBg"></div>
