@@ -37,7 +37,7 @@
     }
 
     /* =========================
-       Glowing Search Bar (authentic effect)
+       Glowing Search Bar (fixed)
     ========================== */
     :root {
       --input-w: 600px;
@@ -65,13 +65,15 @@
       position: relative;
       width: var(--input-w);
       height: var(--input-h);
+      border-radius: var(--radius);
+      overflow: hidden; /* 🔥 ensures glow stays inside */
     }
 
     .input {
       background-color: #010201;
       border: none;
-      width: var(--input-w);
-      height: var(--input-h);
+      width: 100%;
+      height: 100%;
       border-radius: var(--radius);
       color: white;
       padding-inline: 20px 50px;
@@ -89,7 +91,8 @@
     #search-icon {
       position: absolute;
       right: 20px;
-      top: 15px;
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 4;
       font-size: 1.2rem;
       color: #d6d6e6;
@@ -110,6 +113,7 @@
       border-radius: var(--radius);
       pointer-events: none;
       z-index: 1;
+      overflow: hidden; /* 🔥 keep effect inside bar */
     }
 
     .white,
@@ -117,56 +121,40 @@
     .darkBorderBg {
       width: var(--frame-w);
       height: var(--frame-h);
-      filter: blur(3px);
-    }
-
-    .white {
       filter: blur(2px);
     }
+
     .white::before {
       content: "";
       position: absolute;
       inset: 0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(83deg);
-      width: 600px;
-      height: 600px;
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      filter: brightness(1.4);
-      background-image: conic-gradient(
-        rgba(0, 0, 0, 0) 0%,
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(
         #a099d8,
-        rgba(0, 0, 0, 0) 8%,
-        rgba(0, 0, 0, 0) 50%,
-        #dfa2da,
-        rgba(0, 0, 0, 0) 58%
+        transparent 30%,
+        #dfa2da 60%,
+        transparent 90%
       );
+      transform: rotate(83deg);
       transition: transform 2s ease;
     }
 
-    .border {
-      filter: blur(0.5px);
-    }
     .border::before {
       content: "";
       position: absolute;
       inset: 0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(70deg);
-      width: 600px;
-      height: 600px;
-      filter: brightness(1.3);
-      background-image: conic-gradient(
-        #1c191c,
-        #402fb5 5%,
-        #1c191c 14%,
-        #1c191c 50%,
-        #cf30aa 60%,
-        #1c191c 64%
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #402fb5,
+        transparent 40%,
+        #cf30aa 70%,
+        transparent 100%
       );
+      transform: rotate(70deg);
       transition: transform 2s ease;
     }
 
@@ -174,77 +162,71 @@
       content: "";
       position: absolute;
       inset: 0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(82deg);
-      width: 600px;
-      height: 600px;
-      background-image: conic-gradient(
-        rgba(0, 0, 0, 0),
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(
         #18116a,
-        rgba(0, 0, 0, 0) 10%,
-        rgba(0, 0, 0, 0) 50%,
-        #6e1b60,
-        rgba(0, 0, 0, 0) 60%
+        transparent 30%,
+        #6e1b60 60%,
+        transparent 90%
       );
+      transform: rotate(82deg);
       transition: transform 2s ease;
     }
 
     .glow {
       width: var(--frame2-w);
       height: var(--frame2-h);
-      filter: blur(30px);
-      opacity: 0.4;
+      filter: blur(20px);
+      opacity: 0.3;
     }
     .glow::before {
       content: "";
       position: absolute;
       inset: 0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(60deg);
-      width: 999px;
-      height: 999px;
-      background-image: conic-gradient(
-        #000,
-        #402fb5 5%,
-        #000 38%,
-        #000 50%,
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #402fb5,
+        transparent 30%,
         #cf30aa 60%,
-        #000 87%
+        transparent 90%
       );
+      transform: rotate(60deg);
       transition: transform 2s ease;
     }
 
     /* Hover animation */
     #poda:hover > .darkBorderBg::before {
-      transform: translate(-50%, -50%) rotate(262deg);
+      transform: rotate(262deg);
     }
     #poda:hover > .glow::before {
-      transform: translate(-50%, -50%) rotate(240deg);
+      transform: rotate(240deg);
     }
     #poda:hover > .white::before {
-      transform: translate(-50%, -50%) rotate(263deg);
+      transform: rotate(263deg);
     }
     #poda:hover > .border::before {
-      transform: translate(-50%, -50%) rotate(250deg);
+      transform: rotate(250deg);
     }
 
     /* Focus animation */
     #poda:focus-within > .darkBorderBg::before {
-      transform: translate(-50%, -50%) rotate(442deg);
+      transform: rotate(442deg);
       transition: transform 4s ease;
     }
     #poda:focus-within > .glow::before {
-      transform: translate(-50%, -50%) rotate(420deg);
+      transform: rotate(420deg);
       transition: transform 4s ease;
     }
     #poda:focus-within > .white::before {
-      transform: translate(-50%, -50%) rotate(443deg);
+      transform: rotate(443deg);
       transition: transform 4s ease;
     }
     #poda:focus-within > .border::before {
-      transform: translate(-50%, -50%) rotate(430deg);
+      transform: rotate(430deg);
       transition: transform 4s ease;
     }
 
@@ -280,7 +262,7 @@
   <div class="overlay"></div>
   <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
 
-  <!-- Authentic Glowing Search Bar -->
+  <!-- Fixed Glowing Search Bar -->
   <form id="poda" action="https://www.google.com/search" method="GET">
     <div class="glow"></div>
     <div class="darkBorderBg"></div>
