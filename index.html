@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Custom New Tab</title>
+
+  <!-- Preload image for faster load -->
+  <link rel="preload" as="image" href="https://wallpapers-clan.com/wp-content/uploads/2025/07/marvel-iron-man-blue-sky-vision-desktop-wallpaper-preview.jpg">
+
   <style>
     body {
       margin: 0;
@@ -10,22 +14,25 @@
       font-family: Arial, sans-serif;
       height: 100vh;
       width: 100vw;
+
+      /* ✅ Set wallpaper */
       background: url("https://wallpapers-clan.com/wp-content/uploads/2025/07/marvel-iron-man-blue-sky-vision-desktop-wallpaper-preview.jpg") 
                   no-repeat center center fixed;
       background-size: cover;
     }
 
-    /* Overlay for better contrast */
+    /* Dark overlay for contrast */
     .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.3); /* darkens image a bit */
+      background: rgba(0,0,0,0.3);
       z-index: 0;
     }
 
+    /* Your live site */
     iframe {
       position: absolute;
       top: 0;
@@ -37,6 +44,7 @@
       z-index: 1;
     }
 
+    /* Shortcut bar */
     .shortcuts {
       position: fixed;
       bottom: 30px;
@@ -63,11 +71,12 @@
     }
   </style>
 </head>
+
 <body>
-  <!-- Background wallpaper -->
+  <!-- Dark overlay -->
   <div class="overlay"></div>
 
-  <!-- Your live clock site -->
+  <!-- Your live website -->
   <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
 
   <!-- Shortcuts -->
@@ -76,88 +85,6 @@
     <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
     <a href="https://www.youtube.com" target="_blank">YouTube</a>
     <a href="https://github.com" target="_blank">GitHub</a>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Custom New Tab</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      height: 100vh;
-      width: 100vw;
-      background: url("https://wallpapers-clan.com/wp-content/uploads/2025/07/marvel-iron-man-blue-sky-vision-desktop-wallpaper-preview.jpg") 
-                  no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    /* Overlay for better contrast */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3); /* darkens image a bit */
-      z-index: 0;
-    }
-
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: transparent;
-      z-index: 1;
-    }
-
-    .shortcuts {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 20px;
-      z-index: 2;
-    }
-
-    .shortcuts a {
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 30px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
-
-    .shortcuts a:hover {
-      background: rgba(255, 255, 255, 0.8);
-      color: black;
-    }
-  </style>
-</head>
-<body>
-  <!-- Background wallpaper -->
-  <div class="overlay"></div>
-
-  <!-- Your live clock site -->
-  <iframe src="https://datawithanupamg.github.io/Time/"></iframe>
-
-  <!-- Shortcuts -->
-  <div class="shortcuts">
-    <a href="https://www.google.com" target="_blank">Google</a>
-    <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
-    <a href="https://www.youtube.com" target="_blank">YouTube</a>
-    <a href="https://github.com" target="_blank">GitHub</a>
-  </div>
-</body>
-</html>
-
   </div>
 </body>
 </html>
